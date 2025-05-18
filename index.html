@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For Aru, With Love</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap');
+
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    background: repeating-linear-gradient(
+      45deg,
+      #add8e6 0,
+      #add8e6 20px,
+      #ffc0cb 20px,
+      #ffc0cb 40px
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Playfair Display', serif;
+    overflow: hidden;
+  }
+
+  #heart-container {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    transition: transform 0.4s ease;
+  }
+
+  #heart {
+    width: 100%;
+    height: 100%;
+    background: #ff6b81;
+    clip-path: polygon(
+      50% 15%, 61% 25%, 70% 35%, 75% 50%, 70% 65%, 60% 75%, 
+      50% 85%, 40% 75%, 30% 65%, 25% 50%, 30% 35%, 39% 25%
+    );
+    filter: drop-shadow(0 0 5px #ff6b81);
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Heart "open" animation */
+  #heart.open {
+    animation: openHeart 1s forwards;
+  }
+
+  @keyframes openHeart {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.2) rotate(15deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 0; }
+  }
+
+  #letter-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80vw;
+    max-height: 80vh;
+    background: rgba(255 255 255 / 0.9);
+    border-radius: 15px;
+    padding: 30px 40px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    overflow-y: auto;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    font-family: 'Dancing Script', cursive;
+    color: #444;
+    transition: opacity 1s ease;
+    z-index: 1;
+  }
+
+  #letter-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Scrollbar style for letter container */
+  #letter-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  #letter-container::-webkit-scrollbar-thumb {
+    background: #ff6b81;
+    border-radius: 4px;
+  }
+  #letter-container::-webkit-scrollbar-track {
+    background: #ffe6ea;
+  }
+</style>
+</head>
+<body>
+
+<div id="heart-container" title="Click me">
+  <div id="heart"></div>
+</div>
+
+<div id="letter-container" aria-live="polite" role="region" aria-label="Love letter">
+  <p>
+    Aru, trust me dear, you are the best anyone could have or even meet. I trust you with my life and vows, I wanna be with you at your worst, but I can't while being so far away from you. Please know that I can never see you sad or stressed, I'll become a clown if it makes you happy or laugh, I would make joke on prime minister in front of him if it makes your day any better.
+  </p>
+  <p>
+    I want you to know that you are special and there will be some days you just don't want to talk to anyone. But trust me dear, I'll be there for you, even if you don't talk to me, I will talk to myself for you to see. I love you Aru, you should know that.
+  </p>
+</div>
+
+<script>
+  const heartContainer = document.getElementById('heart-container');
+  const heart = document.getElementById('heart');
+  const letter = document.getElementById('letter-container');
+
+  heartContainer.addEventListener('click', () => {
+    heart.classList.add('open');
+    letter.classList.add('visible');
+    playSong();
+  });
+
+  function playSong() {
+    if (document.getElementById('youtube-player')) return;
+
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('id', 'youtube-player');
+    iframe.setAttribute('src', 'https://www.youtube.com/embed/GxldQ9eX2wo?autoplay=1&controls=0&loop=1&playlist=GxldQ9eX2wo');
+    iframe.setAttribute('allow', 'autoplay');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+  }
+</script>
+
+</body>
+</html>
